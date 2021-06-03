@@ -24,11 +24,19 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  Restaurant.find()
+  return Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants, style: 'main.css' }))
     .catch(error => console.log(error))
 
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('detail', { restaurant, style: 'detail.css' }))
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
