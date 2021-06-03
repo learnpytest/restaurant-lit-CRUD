@@ -21,10 +21,12 @@ mongoose.connection.once('open', () => {
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
-    .then(restaurants => res.render('index', { restaurants }))
+    .then(restaurants => res.render('index', { restaurants, style: 'main.css' }))
     .catch(error => console.log(error))
 
 })
