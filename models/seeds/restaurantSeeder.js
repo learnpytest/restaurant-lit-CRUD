@@ -19,13 +19,4 @@ db.once('open', () => {
   return console.log('insert documents done!')
 
 })
-// mongoose.connection.once('open', () => {
-//   Restaurant.insertMany(restaurantData.results, (err) => {
-//     if (err) {
-//       return console.error(err);
-//     }
-//   })
-
-//   return console.log('mongoose connect!')
-// })
 

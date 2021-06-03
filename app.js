@@ -8,7 +8,7 @@ const port = 3000
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 // 設定連線到資料庫
-mongoose.connect('mongodb://127.0.0.1:27017/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://127.0.0.1:27017/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 // 取得資料庫連線狀態
 // 連線異常
 mongoose.connection.on('error', () => {
@@ -51,10 +51,12 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 app.post('/restaurants/:id/edit', (req, res) => {
-  const id = req.params.id
   const update = req.body
-  return Restaurant.findOneAndUpdate(id, { $set: update })
-    .then(() => res.redirect(`/restaurants/${id}`))
+  const id = req.params.id
+  return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
+    .then(() => {
+      res.redirect(`/restaurants/${id}`)
+    })
     .catch(error => console.log(error))
 })
 
