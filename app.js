@@ -18,10 +18,13 @@ mongoose.connection.on('error', () => {
 mongoose.connection.once('open', () => {
   return console.log('mongoose connect!')
 })
+// 設定handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 
+// 設定body parser，public
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   return Restaurant.find()
@@ -36,6 +39,22 @@ app.get('/restaurants/:id', (req, res) => {
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('detail', { restaurant, style: 'detail.css' }))
+    .catch(error => console.log(error))
+})
+
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const update = req.body
+  return Restaurant.findOneAndUpdate(id, { $set: update })
+    .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
 

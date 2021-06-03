@@ -1,0 +1,124 @@
+<div class="container my-3">
+  <div class="row">
+    <div class="col-10 col-lg-6 col-sm-8 mx-auto">
+      <form id="form-edit"
+            action="/restaurants/{{restaurant._id}}/edit"
+            method="POST">
+        <div class="form-group">
+          <label for="name">餐廳中文名稱(必填)</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 placeholder="name"
+                 value="{{restaurant.name}}"
+                 required>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="name_en">餐廳英文名稱</label>
+          <input type="text"
+                 class="form-control"
+                 id="name_en"
+                 name="name_en"
+                 placeholder="請輸入餐廳的英文名稱 ..."
+                 value="{{restaurant.name_en}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="category">餐廳類別</label>
+          <input list="category"
+                 name="category"
+                 class="form-control"
+                 min="2"
+                 value="{{restaurant.category}}">
+          <datalist id="category">
+            <option>中東料裡</option>
+            <option>日本料裡</option>
+            <option>義式餐廳</option>
+            <option>美式</option>
+            <option>酒吧</option>
+            <option>咖啡</option>
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="image_link">圖片網址</label>
+          <input type="text"
+                 class="form-control"
+                 id="image_link"
+                 name="image_link"
+                 placeholder="請輸入圖片網址 ..."
+                 value="{{restaurant.image}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="location">地址</label>
+          <input type="text"
+                 class="form-control"
+                 id="location"
+                 name="location"
+                 placeholder="請輸入餐廳地址 ..."
+                 value="{{restaurant.location}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="phone">電話</label>
+          <input type="text"
+                 class="form-control"
+                 id="phone"
+                 name="phone"
+                 placeholder="請輸入餐廳電話 ..."
+                 value="{{restaurant.phone}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="google_map">Google 地圖網址</label>
+          <input type="text"
+                 class="form-control"
+                 id="google_map"
+                 name="google_map"
+                 placeholder="請輸入Google 地圖網址 ..."
+                 value="{{restaurant.google_map}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="rating">評分</label>
+          <input type="Number"
+                 class="form-control"
+                 id="rating"
+                 name="rating"
+                 placeholder="0 ~ 5 ..."
+                 min="0"
+                 max="5"
+                 value="{{restaurant.rating}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="description">關於</label>
+          <input type="text"
+                 class="form-control"
+                 id="description"
+                 name="description"
+                 placeholder="關於餐廳 ..."
+                 value="{{restaurant.description}}">
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <button id="submit-btn"
+                type="submit"
+                class="btn btn-success mr-3"><i class="fas fa-save mr-1"></i>儲存</button>
+        <a href="/"
+           class="btn btn-danger"
+           style="font-size: 16px;"><i class="fas fa-window-close mr-1"></i>取消</a>
+      </form>
+    </div>
+  </div>
+</div>
