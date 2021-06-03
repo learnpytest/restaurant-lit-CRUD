@@ -85,7 +85,14 @@ header {
   font-size: 0.8rem;
 }
 
+a:hover {
+  text-decoration: none;
+}
 
+#badge-delete:hover {
+  cursor: pointer;
+  background-color: rgb(204, 22, 22);
+}
 
 @media screen and (max-width: 992px) {
   

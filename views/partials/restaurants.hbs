@@ -1,29 +1,40 @@
 {{!-- 從資料庫restaurants collection陣列運用迴圈產生restaurants --}}
 {{#each restaurants}}
-<a href="/restaurants/{{this._id}}"
-   class="text-secondary">
-  <div class="card mb-3">
+
+<div class="card mb-3">
+  <a href="/restaurants/{{this._id}}"
+     class="text-secondary">
     <img class="card-img-top"
          src={{this.image}}
          alt={{this.name}}>
     <div class="card-body p-3">
       <h6 class="card-title mb-1">{{this.name}}</h6>
+      <span class="restaurant-category mb-1">
 
-      <div class="restaurant-category mb-1">
         <i class="fas fa-utensils pr-2"></i> {{this.category}}
-      </div>
 
-      <span class="badge badge-pill badge-danger font-weight-normal">
+      </span>
+      <span class="restaurant-rating badge badge-pill badge-danger font-weight-normal ml-2">
         {{this.rating}}
         <i class="fas fa-star fa-xs"></i>
       </span>
-
-      <a href="/restaurants/{{this._id}}"
-         class="badge badge-pill badge-info font-weight-bolder"><i class="fas fa-info-circle mr-1"></i>detail</a>
-      <a href="/restaurants/{{this._id}}/edit"
-         class="badge badge-pill badge-secondary font-weight-bolder"><i class="fas fa-edit mr-1"></i>edit</a>
-
     </div>
+  </a>
+  <div class="card-footer">
+    <a href="/restaurants/{{this._id}}"
+       class="badge badge-pill badge-info font-weight-bolder"><i class="fas fa-info-circle mr-1"></i>detail</a>
+    <a href="/restaurants/{{this._id}}/edit"
+       class="badge badge-pill badge-secondary font-weight-bolder"><i class="fas fa-edit mr-1"></i>edit</a>
+    <form action="/restaurants/{{this._id}}"
+          method="POST"
+          style="display: inline;">
+      <button id="badge-delete"
+              type="submit"
+              class="badge badge-pill badge-danger border-0"><i class="fas fa-trash-alt mr-1"></i>delete</button>
+    </form>
   </div>
-</a>
+</div>
+
+
+
 {{/each}}

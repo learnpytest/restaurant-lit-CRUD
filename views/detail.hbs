@@ -1,13 +1,24 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <div class="container">
+  {{!-- CRUD選項 --}}
   <div class="row mb-4">
     <div class="col-1 mr-1"><a href="/"
          class="badge badge-pill badge-info"
          style="font-size: 16px;"><i class="fas fa-arrow-left mr-2"></i>Back</a></div>
-    <div class="col-1">
+    <div class="col-1 mr-1">
       <a href="/restaurants/{{restaurant._id}}/edit"
          class="badge badge-pill badge-secondary font-weight-bolder"
-         style="font-size: 16px;"><i class="fas fa-edit mr-1"></i>edit</a>
+         style="font-size: 16px;"><i class="fas fa-edit mr-2"></i>edit</a>
+    </div>
+    <div class="col-1 mr-1">
+      <form action="/restaurants/{{restaurant._id}}"
+            method="POST"
+            style="display: inline;">
+        <button type="submit"
+                id="badge-delete"
+                class="badge badge-pill badge-danger border-0"
+                style="font-size: 16px;"><i class="fas fa-trash-alt mr-2"></i>delete</button>
+      </form>
     </div>
 
   </div>

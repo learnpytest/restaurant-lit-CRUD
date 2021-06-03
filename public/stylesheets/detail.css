@@ -36,6 +36,10 @@ header {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+#badge-delete:hover {
+  cursor: pointer;
+  background-color: rgb(204, 22, 22);
+}
 
 @media screen and (max-width: 768px) {
   

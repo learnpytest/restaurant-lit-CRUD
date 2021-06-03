@@ -16,7 +16,7 @@ db.once('open', () => {
     if (err) return console.log('insert documents error')
   })
   console.log('monoose connected!')
-  console.log('insert documents done!')
+  return console.log('insert documents done!')
 
 })
 // mongoose.connection.once('open', () => {
