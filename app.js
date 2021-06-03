@@ -3,22 +3,25 @@ const exphbs = require('express-handlebars')
 const express = require('express')
 const app = express()
 const port = 3000
+// 設定handlebars
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
+app.set('view engine', 'hbs')
 // 設定連線到資料庫
 mongoose.connect('mongodb://127.0.0.1:27017/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
 // 取得資料庫連線狀態
 // 連線異常
 mongoose.connection.on('error', () => {
-  console.log('mongodb error!')
+  return console.log('mongodb error!')
 })
 // 連線正常
 mongoose.connection.once('open', () => {
-  console.log('mongoose connect!')
+  return console.log('mongoose connect!')
 })
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
-  res.send('This is restaurant list CRUD')
+  return res.render('index')
 })
 
 app.listen(port, () => {
