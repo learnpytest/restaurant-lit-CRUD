@@ -68,6 +68,16 @@ app.post('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.post('/restaurants', (req, res) => {
+  const data = req.body
+  return Restaurant.create(data)
+    .then(() => res.redirect('/'))
+    .catch()
+  // const data = req.body
+  // const newRestaurant = new Restaurant(data)
+  // newRestaurant.save().then(() => res.redirect('/'))
+})
+
 app.listen(port, () => {
   console.log(`The server is running on https://localhost:${port}`)
 })
