@@ -46,12 +46,6 @@ app.get('/restaurants/search', (req, res) => {
   results.lean()
     .then(restaurants => res.render('index', { restaurants, style: 'main.css' }))
 
-  //   const reg = new RegExp(keyword, 'i')
-  // Restaurant.find({ $or: [{ name: { $regex: reg } }, { category: { $regex: reg } }] })
-  //   .lean()
-  //   .then(restaurants => res.render('index', { restaurants, style: 'main.css' }))
-  //   .catch(error => console.log(error))
-
 })
 
 
