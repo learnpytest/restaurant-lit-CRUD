@@ -21,11 +21,10 @@
         </div>
       </form>
     </div>
+    {{#if keyword}}
+    {{> search}}
+    {{/if}}
 
-    {{!-- {{#if partials.isOnSearched}}
-    <div class="d-flex align-items-center justify-content-center"
-         style="width: 100%;">{{> search}}</div>
-    {{/if}} --}}
   </div>
 </div>
 

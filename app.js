@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
 const exphbs = require('express-handlebars')
+const helpers = require('express-handlebars')
 const express = require('express')
 const app = express()
+app.locals.partials = {}
 const port = 3000
 // 搜尋功能
 const getSearchResults = require('./models/search-service.js')
@@ -31,27 +33,19 @@ app.use(express.urlencoded({ extended: true }))
 
 // 搜尋功能
 app.get('/restaurants/search', (req, res) => {
-  if (!app.locals.partials) {
-    app.locals.partials = {};
-  }
   // this will trigger search template to show search related information on page
-  app.locals.partials.isOnSearched = true
   const keyword = req.query.keyword
-  // show search information - remind user enter something and return function, no view action done
-  if (!keyword.length) {
-    app.locals.partials.isSearchInputValid = false
-    return res.redirect('/')
-  }
-  let results = getSearchResults(keyword)
+  // get search results, if cannot get valid search results, show user error notice
+  const results = getSearchResults(keyword)
+  if (!results) return res.render('index', { keyword, results, style: 'main.css' })
   results.lean()
-    .then(restaurants => res.render('index', { restaurants, style: 'main.css' }))
-
+    .then(results => {
+      app.locals.partials.currentData = results
+      app.locals.partials.dataLength = results.length
+      return res.render('index', { keyword, results, style: 'main.css' })
+    })
+    .catch(error => console.log(error))
 })
-
-
-
-
-
 
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
@@ -98,11 +92,14 @@ app.post('/restaurants', (req, res) => {
   // newRestaurant.save().then(() => res.redirect('/'))
 })
 app.get('/', (req, res) => {
+  // 取得資料庫資料
   return Restaurant.find()
     .lean()
-    .then(restaurants => res.render('index', { restaurants, style: 'main.css' }))
+    .then(restaurants => {
+      app.locals.partials.currentData = restaurants
+      return res.render('index', { restaurants, style: 'main.css' })
+    })
     .catch(error => console.log(error))
-
 })
 // 引入多筆資料
 
