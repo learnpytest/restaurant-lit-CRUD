@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 // 載入Restaurant model
+// const restaurantData = require('./restaurant.json')
 const restaurantData = require('./restaurant.json')
+
 const Restaurant = require('../restaurant.js')
 
 // 設定連線到資料庫

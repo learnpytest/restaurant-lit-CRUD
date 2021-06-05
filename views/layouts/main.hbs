@@ -36,12 +36,29 @@
                                    alt="好。吃">
                               我的餐廳清單
                         </a>
+                        {{!-- 這裡是新增餐廳元件 --}}
                         <button type="button"
                                 class="btn btn-dark"
                                 data-toggle="modal"
                                 data-target="#modal-form">
                               Create
                         </button>
+                        {{!-- 這裡是新增餐廳元件 --}}
+
+                        {{!-- 這裡是上傳檔案元件 --}}
+                        <form action="/upload"
+                              method="post"
+                              enctype="multipart/form-data">
+
+                              <input class="bg-secondary"
+                                     id="file-upload-json"
+                                     name="fileUpload"
+                                     type="file" />
+                              <button type="submit"
+                                      class="btn btn-info">Import Restaurants by JSON</button>
+                        </form>
+                        {{!-- 這裡是上傳檔案元件 --}}
+
                   </div>
 
             </nav>

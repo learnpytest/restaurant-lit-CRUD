@@ -1,3 +1,12 @@
+// 這裡是上傳檔案
+const multer = require('multer');
+const fs = require('fs');
+const UPLOAD_PATH = './uploads'
+const upload = multer({ dest: UPLOAD_PATH })
+const importRestaurant = require('./models/importRestaurant')
+// 這裡是上傳檔案
+
+
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
 const exphbs = require('express-handlebars')
@@ -7,7 +16,7 @@ const app = express()
 app.locals.partials = {}
 const port = 3000
 // 搜尋功能
-const getSearchResults = require('./models/search-service.js')
+const getSearchResults = require('./models/getSearchResults.js')
 
 // 設定handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
@@ -31,6 +40,36 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
+// 這裡是上傳檔案
+app.post('/upload', upload.single('fileUpload'), function (req, res, next) {
+  const file = req.file
+  fs.readFile(file.path, (err, data) => {
+    if (err) return console.log(err)
+    fs.writeFile(`${UPLOAD_PATH}/${file.originalname}`, data, (err) => {
+      if (err) return console.log(err)
+      importRestaurant(`${file.originalname}`)
+      console.log('import done')
+      res.redirect('/')
+      console.log('render')
+      fs.readdir(`${UPLOAD_PATH}`, (err, files) => {
+        if (err) throw err;
+        for (const file of files) {
+          fs.unlink(`${UPLOAD_PATH}/${file}`, err => {
+            if (err) throw err;
+          });
+        }
+      });
+    })
+  })
+
+
+
+  //file removed
+
+})
+// 這裡是上傳檔案
+
+
 // 搜尋功能
 app.get('/restaurants/search', (req, res) => {
   // this will trigger search template to show search related information on page
@@ -47,6 +86,7 @@ app.get('/restaurants/search', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 這裡是編輯功能
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -54,6 +94,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
+// 這裡是編輯功能
 
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
@@ -68,7 +109,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
     .then(() => {
-      res.redirect(`/restaurants/${id}`)
+      res.redirect(`/ restaurants / ${id}`)
     })
     .catch(error => console.log(error))
 })
