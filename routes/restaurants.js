@@ -61,8 +61,12 @@ router.post('/restaurants/:id/delete', (req, res) => {
 })
 // 這裡是刪除一筆餐廳資料路由
 
+
+const { check, validationResult } = require('express-validator')
+const isValid = require('../modules/isValid')
 // 這裡是新增一筆餐廳資料路由
-router.post('/restaurants', (req, res) => {
+router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isValid, (req, res) => {
+  // 驗證名稱與類別以後新增以下資料
   const data = req.body
   return Restaurant.create(data)
     .then(() => res.redirect('/'))
@@ -72,7 +76,4 @@ router.post('/restaurants', (req, res) => {
   // newRestaurant.save().then(() => res.redirect('/'))
 })
 // 這裡是新增一筆餐廳資料路由
-
-
-
 module.exports = router
