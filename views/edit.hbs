@@ -1,8 +1,7 @@
 <div class="container my-3">
   <div class="row">
     <div class="col-10 col-lg-6 col-sm-8 mx-auto">
-      <form id="form-edit"
-            action="/restaurants/{{restaurant._id}}/edit"
+      <form action="/restaurants/{{restaurant._id}}/edit"
             method="POST">
         <div class="form-group">
           <label for="name">餐廳中文名稱(必填)</label>
@@ -111,13 +110,7 @@
           <div class="valid-feedback"></div>
           <div class="invalid-feedback"></div>
         </div>
-
-        <button id="submit-btn"
-                type="submit"
-                class="btn btn-success mr-3"><i class="fas fa-save mr-1"></i>儲存</button>
-        <a href="/"
-           class="btn btn-danger"
-           style="font-size: 16px;"><i class="fas fa-window-close mr-1"></i>取消</a>
+        {{> footer_button}}
       </form>
     </div>
   </div>

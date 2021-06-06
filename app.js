@@ -62,7 +62,7 @@ app.get('/restaurants/search', getSearchResults, (req, res) => {
 })
 // 這裡是搜尋功能
 
-// 這裡是編輯功能
+// 這裡是編輯路由
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -70,8 +70,17 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
-// 這裡是編輯功能
 
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const update = req.body
+  return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+// 這裡是編輯路由
+
+// 這裡是一筆詳細餐廳資料路由
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -79,16 +88,8 @@ app.get('/restaurants/:id', (req, res) => {
     .then(restaurant => res.render('detail', { restaurant, style: 'detail.css' }))
     .catch(error => console.log(error))
 })
+// 這裡是一筆詳細餐廳資料路由
 
-app.post('/restaurants/:id/edit', (req, res) => {
-  const update = req.body
-  const id = req.params.id
-  return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
-    .then(() => {
-      res.redirect(`/ restaurants / ${id}`)
-    })
-    .catch(error => console.log(error))
-})
 
 app.post('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
