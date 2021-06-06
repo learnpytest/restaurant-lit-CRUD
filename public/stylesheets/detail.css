@@ -37,6 +37,7 @@ header {
 }
 
 #badge-delete:hover {
+  color:honeydew;
   cursor: pointer;
   background-color: rgb(204, 22, 22);
 }

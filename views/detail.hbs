@@ -11,14 +11,45 @@
          style="font-size: 16px;"><i class="fas fa-edit mr-2"></i>edit</a>
     </div>
     <div class="col-1 mr-1">
-      <form action="/restaurants/{{restaurant._id}}"
+      {{!-- 這裡是刪除資料的元件 --}}
+      <form action="/restaurants/{{restaurant._id}}/delete"
+            method="POST"
+            style="display: inline;">
+        <button id="badge-delete"
+                type="button"
+                class="btn badge badge-pill badge-danger border-0 font-weight-bolder"
+                data-toggle="modal"
+                data-target="#modal{{restaurant._id}}"
+                style="font-size: 16px;"><i class="fas fa-trash-alt mr-1"></i>delete</button>
+        <!-- Modal -->
+        <div class="modal fade"
+             id="modal{{restaurant._id}}"
+             tabindex="-1"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body justify-content-center text-center">
+                <h5>確定要刪除 <span class="font-weight-bold">{{restaurant.name}}</span> 嗎?</h5>
+              </div>
+              <div class="modal-footer">
+                {{> footer_button}}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </form>
+      {{!-- 這裡是刪除資料的元件 --}}
+
+      {{!-- <form action="/restaurants/{{restaurant._id}}"
             method="POST"
             style="display: inline;">
         <button type="submit"
                 id="badge-delete"
                 class="badge badge-pill badge-danger border-0"
                 style="font-size: 16px;"><i class="fas fa-trash-alt mr-2"></i>delete</button>
-      </form>
+      </form> --}}
     </div>
 
   </div>
