@@ -1,5 +1,6 @@
 <form action="/restaurants"
-      method="POST">
+      method="POST"
+      class="was-validated">
   <div class="modal-header">
     <h5 class="modal-title w-100 text-center"
         id="modal-title-restaurant">新增餐廳</h5>
@@ -22,8 +23,8 @@
                    name="name"
                    placeholder="name"
                    required>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">OK!</div>
+            <div class="invalid-feedback">This field is required!</div>
           </div>
           <div class="form-group">
             <label for="name_en">餐廳英文名稱</label>
@@ -40,7 +41,8 @@
             <input list="category"
                    name="category"
                    class="form-control"
-                   min="2">
+                   min="2"
+                   required>
             <datalist id="category">
               <option>中東料裡</option>
               <option>日本料裡</option>
@@ -98,17 +100,19 @@
                    name="rating"
                    placeholder="0 ~ 5 ..."
                    min="0"
-                   max="5">
+                   max="5"
+                   step="0.1">
             <div class="valid-feedback"></div>
             <div class="invalid-feedback"></div>
           </div>
           <div class="form-group">
             <label for="description">關於</label>
-            <input type="text"
-                   class="form-control"
-                   id="description"
-                   name="description"
-                   placeholder="關於餐廳 ...">
+            <textarea type="text"
+                      class="form-control"
+                      id="description"
+                      name="description"
+                      placeholder="關於餐廳 ..."
+                      rows="3"></textarea>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback"></div>
           </div>

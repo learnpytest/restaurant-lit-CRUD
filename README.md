@@ -21,24 +21,30 @@ Establish seed data:
 $ npm run seed
 
 ## Features
-### index page
-- User can view all restaurants and their posters.  The list of restaurants is ordered by name
-- User can click on either photo or name of a restaurant to access detail page
-- User can create new restaurant and name it
-- User can update selected restaurant
+### Index page
+- Listing restaurants and their posters.  The list of restaurants is ordered by name
+- Clicking on either photo or name of a restaurant to access Detail page
+- Clicking on "Create" button brings you to New page to ceate a new restaurant and name it
+- Clicking on "edit" button to update selected restaurant
 - User can delete restaurant from list
-- User can upload file, and import mutil restaurants from one JSON file
+- User can upload file, and import multi restaurants from one JSON file
 
-### detail page
+### Detail page
 - User can read details of a selected restaurant
 - User can access to create, update, delete, upload features from this page
+
+### New page
+- Restaurant name and category are required for creating a new restaurant
 
 ### Specifications
 - MongoDB
 - Express
 - Seed data: restaurant.json
 - Using Bootstrap, RWD
+- Using middleware, express routes
 - Error/exception handling
 	- Error message pops up if user clicks button without selecting any target first
 	- Confirm window pops up before deleting restaurant data
+	- Form input validation on browser and server end
 - The app has scalabilities to add more restaurants data
+
