@@ -21,7 +21,6 @@ const fileReadWrite = (req, res, next) => {
       });
       console.log('remove uploaded files')
     })
-
   })
   next()
 }

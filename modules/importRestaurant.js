@@ -1,5 +1,4 @@
 function importRestaurant(FILE_PATH) {
-  // const mongoose = require('mongoose')
   // 載入Restaurant model
   const dataToImport = require(`../uploads/${FILE_PATH}`)
   const Restaurant = require('../models/restaurant')
