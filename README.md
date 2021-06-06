@@ -36,6 +36,25 @@ $ npm run seed
 ### New page
 - Restaurant name and category are required for creating a new restaurant
 
+### Upload file
+- Click "Select File" button on top of page, choose a JSON file that you are going to upload and then click "Import Restaurant by JSON" button to import restaurants to database.  Using the JSON file format as following sample:
+{
+  "results": [
+    {
+      "id": 1,
+      "name": "Sababa 沙巴巴中東美食",
+      "name_en": "Sababa Pita Bar",
+      "category": "中東料理",
+      "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg",
+      "location": "台北市羅斯福路三段 283 巷 17 號",
+      "phone": "02 2363 8009",
+      "google_map": "https://goo.gl/maps/BJdmLuVdDbw",
+      "rating": 4.1,
+      "description": "沙巴巴批塔是台灣第一家純手工批塔專賣店,只選用最新鮮的頂級原料,以及道地的中東家傳配方。"
+    }
+  ]
+}
+
 ### Specifications
 - MongoDB
 - Express
