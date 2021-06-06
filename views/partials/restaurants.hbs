@@ -1,5 +1,6 @@
 {{!-- 從資料庫restaurants collection陣列運用迴圈產生restaurants --}}
-{{#each partials.currentData}}
+{{!-- {{#each partials.currentData}} --}}
+{{#each restaurants}}
 <div class="card mb-3">
   {{!-- 這裡是餐廳清單的元件 --}}
   <a href="/restaurants/{{this._id}}"
