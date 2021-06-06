@@ -22,8 +22,6 @@ const index = require('./routes/index')
 // 以下是一些設定, handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs', helpers: { isglobal: function (value) { return myGlobal[value] } } }))
 app.set('view engine', 'hbs')
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
-app.set('view engine', 'hbs')
 
 // 這裡是路由
 app.use(restaurants) //creat, read, update, delete
