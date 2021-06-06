@@ -26,7 +26,7 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 
 // 這裡是路由
-app.use(restaurants)
+app.use(restaurants) //creat, read, update, delete
 app.use(upload)
 app.use(index)
 
