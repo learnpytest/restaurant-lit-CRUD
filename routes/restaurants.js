@@ -71,9 +71,6 @@ router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('c
   return Restaurant.create(data)
     .then(() => res.redirect('/'))
     .catch()
-  // const data = req.body
-  // const newRestaurant = new Restaurant(data)
-  // newRestaurant.save().then(() => res.redirect('/'))
 })
 // 這裡是新增一筆餐廳資料路由
 module.exports = router
