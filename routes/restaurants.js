@@ -3,6 +3,12 @@ const router = express.Router();
 const Restaurant = require('../models/restaurant')
 // 搜尋功能檔案
 const getSearchResults = require('../modules/getSearchResults')
+// 搜尋功能檔案
+
+// 驗證
+const { check, validationResult } = require('express-validator')
+const isValid = require('../modules/isValid')
+// 驗證
 
 router.use(express.static('public'))
 router.use(express.urlencoded({ extended: true }))
@@ -32,7 +38,7 @@ router.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/restaurants/:id/edit', (req, res) => {
+router.post('/restaurants/:id/edit', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isValid, (req, res) => {
   const id = req.params.id
   const update = req.body
   return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
@@ -62,8 +68,6 @@ router.post('/restaurants/:id/delete', (req, res) => {
 // 這裡是刪除一筆餐廳資料路由
 
 
-const { check, validationResult } = require('express-validator')
-const isValid = require('../modules/isValid')
 // 這裡是新增一筆餐廳資料路由
 router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isValid, (req, res) => {
   // 驗證名稱與類別以後新增以下資料
