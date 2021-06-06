@@ -15,7 +15,7 @@ const app = express()
 app.locals.partials = {}
 const port = 3000
 // 搜尋功能
-const getSearchResults = require('./models/getSearchResults.js')
+const getSearchResults = require('./public/javascripts/getSearchResults.js')
 
 // 設定handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
@@ -46,12 +46,11 @@ app.post('/upload', upload.single('fileUpload'), fileReadWrite, (req, res) => {
 // 這裡是上傳檔案
 
 
-// 搜尋功能
-app.get('/restaurants/search', (req, res) => {
-  // this will trigger search template to show search related information on page
+// 這裡是搜尋功能
+app.get('/restaurants/search', getSearchResults, (req, res) => {
+  // keyword invalid, show user error notice
   const keyword = req.query.keyword
-  // get search results, if cannot get valid search results, show user error notice
-  const results = getSearchResults(keyword)
+  const results = req.results
   if (!results) return res.render('index', { keyword, results, style: 'main.css' })
   results.lean()
     .then(results => {
@@ -61,6 +60,7 @@ app.get('/restaurants/search', (req, res) => {
     })
     .catch(error => console.log(error))
 })
+// 這裡是搜尋功能
 
 // 這裡是編輯功能
 app.get('/restaurants/:id/edit', (req, res) => {
@@ -118,7 +118,6 @@ app.get('/', (req, res) => {
     })
     .catch(error => console.log(error))
 })
-// 引入多筆資料
 
 
 app.listen(port, () => {
