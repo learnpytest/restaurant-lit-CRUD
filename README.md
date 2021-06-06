@@ -22,7 +22,7 @@ $ npm run seed
 
 ## Features
 ### Index page
-- Listing restaurants and their posters.  The list of restaurants is ordered by name
+- Listing restaurants and their posters.
 - Clicking on either photo or name of a restaurant to access Detail page
 - Clicking on "Create" button brings you to New page to ceate a new restaurant and name it
 - Clicking on "edit" button to update selected restaurant
@@ -64,8 +64,8 @@ $ npm run seed
 - Using Bootstrap, RWD
 - Using middleware, express routes
 - Error/exception handling
-	- Error message pops up if user clicks button without selecting any target first
+	- Error message pops up if user enter empty keywords in search bar
 	- Confirm window pops up before deleting restaurant data
-	- Form input validation by bootstrap on browser and express on server end
+	- Form input validation for create and edit function by bootstrap on browser and express on server end
 - The app has scalabilities to add more restaurants data
 
