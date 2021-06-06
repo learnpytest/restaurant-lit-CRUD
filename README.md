@@ -45,6 +45,6 @@ $ npm run seed
 - Error/exception handling
 	- Error message pops up if user clicks button without selecting any target first
 	- Confirm window pops up before deleting restaurant data
-	- Form input validation on browser and server end
+	- Form input validation by bootstrap on browser and express on server end
 - The app has scalabilities to add more restaurants data
 
