@@ -38,6 +38,7 @@ $ npm run seed
 
 ### Upload file
 - Click "Select File" button on top of page, choose a JSON file that you are going to upload and then click "Import Restaurant by JSON" button to import restaurants to database.  Using the JSON file format as following sample:
+
 {
   "results": [
     {
@@ -54,6 +55,7 @@ $ npm run seed
     }
   ]
 }
+
 
 ### Specifications
 - MongoDB
