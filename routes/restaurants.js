@@ -26,24 +26,14 @@ router.get('/restaurants/backs', (req, res) => {
 // 這裡是回到前一頁的路由
 
 // 這裡是搜尋功能的路由
-router.get('/restaurants/search', getSearchResults, (req, res) => {
-  // keyword invalid, show user error notice
+const verifySearchInputOutput = require('../modules/verifySearchInputOutput')
+router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (req, res) => {
   const keyword = req.query.keyword
   const results = req.results
-  if (!results) return res.render('index', { keyword, results, style: 'main.css' })
   results.lean()
     .then(results => {
       const length = results.length
-      req.currentRestaurants = results
-      // 這裡是將沒有找搜尋結果提示給使用者
-      if (!length) return res.render('index', {
-        error: `<h5 class= "alert alert-warning text-center"> No Search results by keyword: "${keyword}" </h5><div class="col-12 mr-1 mt-5 text-center"><a href="/"
-         class= "badge badge-pill badge-info"
-         style="font-size: 16px;" > <i class="fas fa-arrow-left mr-2"></i>Back</a></div>`
-      })
-      // 這裡是將沒有找搜尋結果提示給使用者
-
-      return res.render('index', { restaurants: req.currentRestaurants, length, keyword, results, style: 'main.css' })
+      return res.render('index', { restaurants: results, length, keyword, results, style: 'main.css' })
     })
     .catch(error => console.log(error))
 })
