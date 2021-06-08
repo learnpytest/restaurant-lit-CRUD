@@ -1,4 +1,5 @@
 const express = require('express');
+const app = express()
 const router = express.Router();
 const Restaurant = require('../models/restaurant')
 // 搜尋功能檔案
@@ -12,6 +13,16 @@ const isValid = require('../modules/isValid')
 
 router.use(express.static('public'))
 router.use(express.urlencoded({ extended: true }))
+
+// 這裡是回到前一頁的路由
+app.partials = {}
+router.get('/restaurants/backs', (req, res) => {
+  const backURL = req.header('Referer') + '/..'
+  const back = app.partials.backURL
+  res.redirect(back)
+  app.partials.backURL = backURL
+})
+// 這裡是回到前一頁的路由
 
 // 這裡是搜尋功能的路由
 router.get('/restaurants/search', getSearchResults, (req, res) => {
@@ -32,6 +43,8 @@ router.get('/restaurants/search', getSearchResults, (req, res) => {
 // 這裡是編輯路由
 router.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
+  const backURL = req.header('Referer')
+  app.partials.backURL = backURL
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
