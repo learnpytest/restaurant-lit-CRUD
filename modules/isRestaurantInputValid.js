@@ -1,4 +1,4 @@
-const isValid = (req, res, next) => {
+const isRestaurantInputValid = (req, res, next) => {
   const { validationResult } = require('express-validator')
   const { name, category } = req.body
   const errors = validationResult(req)
@@ -18,4 +18,4 @@ const isValid = (req, res, next) => {
   }
   next()
 }
-module.exports = isValid
+module.exports = isRestaurantInputValid

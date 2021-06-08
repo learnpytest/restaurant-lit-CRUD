@@ -8,7 +8,7 @@ const getSearchResults = require('../modules/getSearchResults')
 
 // 驗證
 const { check, validationResult } = require('express-validator')
-const isValid = require('../modules/isValid')
+const isRestaurantInputValid = require('../modules/isRestaurantInputValid')
 // 驗證
 
 router.use(express.static('public'))
@@ -51,7 +51,7 @@ router.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/restaurants/:id/edit', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isValid, (req, res) => {
+router.post('/restaurants/:id/edit', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isRestaurantInputValid, (req, res) => {
   const id = req.params.id
   const update = req.body
   return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
@@ -82,7 +82,7 @@ router.post('/restaurants/:id/delete', (req, res) => {
 
 
 // 這裡是新增一筆餐廳資料路由
-router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isValid, (req, res) => {
+router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isRestaurantInputValid, (req, res) => {
   // 驗證名稱與類別以後新增以下資料
   const data = req.body
   return Restaurant.create(data)
