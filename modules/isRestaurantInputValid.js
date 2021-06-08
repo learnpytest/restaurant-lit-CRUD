@@ -1,12 +1,11 @@
+const { validationResult } = require('express-validator')
 const isRestaurantInputValid = (req, res, next) => {
-  const { validationResult } = require('express-validator')
   const { name, category } = req.body
   const errors = validationResult(req)
   let errMessage = ''
   errors.array().forEach(err => {
     errMessage += `<pre>The ${err.param}: "${err.value}" that you provided is not a restaurant ${err.param}!</pre>`
   })
-  console.log(errMessage)
   // 如果有錯誤訊息＝驗證失敗
   if (!errors.isEmpty()) {
     // 顯示驗證失敗的訊息

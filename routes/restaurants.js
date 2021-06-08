@@ -20,8 +20,7 @@ router.use(express.urlencoded({ extended: true }))
 app.partials = {}
 router.get('/restaurants/backs', (req, res) => {
   const backURL = req.header('Referer') + '/..'
-  const back = app.partials.backURL
-  res.redirect(back)
+  res.redirect(app.partials.backURL)
   app.partials.backURL = backURL
 })
 // 這裡是回到前一頁的路由
@@ -42,8 +41,7 @@ router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (re
 // 這裡是編輯路由
 router.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const backURL = req.header('Referer')
-  app.partials.backURL = backURL
+  app.partials.backURL = req.header('Referer')
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
