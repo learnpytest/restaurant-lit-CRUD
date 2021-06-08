@@ -1,9 +1,10 @@
+const multer = require('multer');
+const fs = require('fs');
+const UPLOAD_PATH = './uploads'
+const upload = multer({ dest: UPLOAD_PATH })
+const importRestaurant = require('./importRestaurant') //資料庫模板
+
 const fileReadWrite = (req, res, next) => {
-  const multer = require('multer');
-  const fs = require('fs');
-  const UPLOAD_PATH = './uploads'
-  const upload = multer({ dest: UPLOAD_PATH })
-  const importRestaurant = require('./importRestaurant')
   const file = req.file
   fs.readFile(file.path, (err, data) => {
     if (err) return console.log(err)

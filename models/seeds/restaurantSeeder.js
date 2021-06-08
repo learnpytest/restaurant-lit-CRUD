@@ -1,19 +1,12 @@
-const mongoose = require('mongoose')
-// 載入Restaurant model
-// const restaurantData = require('./restaurant.json')
-const restaurantData = require('./restaurant.json')
 
-const Restaurant = require('../restaurant.js')
+const Restaurant = require('../restaurant.js') // 資料模板
+const restaurantData = require('./restaurant.json') // 種子資料內容
+const db = require('../../config/mongoose') // 設定連線到資料庫
 
-// 設定連線到資料庫
-mongoose.connect('mongodb://127.0.0.1:27017/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 // 取得資料庫連線狀態
-const db = mongoose.connection
-// 連線異常
 db.on('error', () => {
   console.log('mongodb error!')
 })
-// 連線正常
 db.once('open', () => {
   Restaurant.insertMany(restaurantData.results, (err) => {
     if (err) return console.log('insert documents error')
@@ -21,6 +14,5 @@ db.once('open', () => {
   Restaurant.createIndexes({ '$**': 'text' })
   console.log('monoose connected!')
   return console.log('insert documents done!')
-
 })
 

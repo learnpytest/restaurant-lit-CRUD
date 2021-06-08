@@ -1,12 +1,11 @@
-const config = require('./configs/config')
+const config = require('./config/config')
 const Restaurant = require('./models/restaurant')
 const exphbs = require('express-handlebars')
 const express = require('express')
 const app = express()
 
 // 這裡是連線資料庫
-const mongoose_connect = require('./modules/mongoose_connect')
-mongoose_connect()
+require('./config/mongoose')
 // 這裡是連線資料庫
 
 // 一些路由檔案
@@ -24,6 +23,7 @@ app.use(restaurants) //creat, read, update, delete
 app.use(upload)
 app.use(index)
 
+// 啟動伺服器
 app.listen(config.port, () => {
   console.log(`The server is running on https://localhost:${config.port}`)
 })

@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Restaurant = require('../models/restaurant')
+const Restaurant = require('../models/restaurant') // 取得資料庫資料
 
 router.get('/', (req, res) => {
-  // 取得資料庫資料
   return Restaurant.find()
     .lean()
     .then(restaurants => {

@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express()
 const router = express.Router();
-const Restaurant = require('../models/restaurant')
-// 搜尋功能檔案
-const getSearchResults = require('../modules/getSearchResults')
-// 搜尋功能檔案
+
+const Restaurant = require('../models/restaurant') // 資料庫模板
+
+
+const getSearchResults = require('../modules/getSearchResults') // 搜尋功能檔案
 
 // 驗證
 const { check, validationResult } = require('express-validator')
@@ -32,10 +33,10 @@ router.get('/restaurants/search', getSearchResults, (req, res) => {
   if (!results) return res.render('index', { keyword, results, style: 'main.css' })
   results.lean()
     .then(results => {
+      const length = results.length
       req.currentRestaurants = results
-
       // 這裡是將沒有找搜尋結果提示給使用者
-      if (!results.length) return res.render('index', {
+      if (!length) return res.render('index', {
         error: `<h5 class= "alert alert-warning text-center"> No Search results by keyword: "${keyword}" </h5><div class="col-12 mr-1 mt-5 text-center"><a href="/"
          class= "badge badge-pill badge-info"
          style="font-size: 16px;" > <i class="fas fa-arrow-left mr-2"></i>Back</a></div>`
