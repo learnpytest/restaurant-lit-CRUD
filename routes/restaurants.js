@@ -4,8 +4,9 @@ const router = express.Router();
 
 const Restaurant = require('../models/restaurant') // 資料庫模板
 
-
-const getSearchResults = require('../modules/getSearchResults') // 搜尋功能檔案
+// 搜尋功能檔案
+const getSearchResults = require('../modules/getSearchResults')
+const verifySearchInputOutput = require('../modules/verifySearchInputOutput')
 
 // 驗證
 const { check, validationResult } = require('express-validator')
@@ -26,7 +27,6 @@ router.get('/restaurants/backs', (req, res) => {
 // 這裡是回到前一頁的路由
 
 // 這裡是搜尋功能的路由
-const verifySearchInputOutput = require('../modules/verifySearchInputOutput')
 router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (req, res) => {
   const keyword = req.query.keyword
   const results = req.results
