@@ -11,8 +11,10 @@ const getSearchResults = (req, res, next) => {
   mongoose_connect()
   // 這裡是連線資料庫
   const Restaurant = require('../models/restaurant') // 載入 todo model
-  const reg = new RegExp(keyword, 'i')
-  req.results = Restaurant.find({ $or: [{ name: { $regex: reg } }, { category: { $regex: reg } }] })
+  const regex = new RegExp(keyword, 'i')
+  req.results = Restaurant.find({ $or: [{ name: { $regex: regex } }, { category: { $regex: regex } }] })
+  const results = req.results.lean()
+  console.log(results.length)
   next()
 }
 module.exports = getSearchResults

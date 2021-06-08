@@ -33,7 +33,15 @@ router.get('/restaurants/search', getSearchResults, (req, res) => {
   results.lean()
     .then(results => {
       req.currentRestaurants = results
-      const length = results.length
+
+      // 這裡是將沒有找搜尋結果提示給使用者
+      if (!results.length) return res.render('index', {
+        error: `<h5 class= "alert alert-warning text-center"> No Search results by keyword: "${keyword}" </h5><div class="col-12 mr-1 mt-5 text-center"><a href="/"
+         class= "badge badge-pill badge-info"
+         style="font-size: 16px;" > <i class="fas fa-arrow-left mr-2"></i>Back</a></div>`
+      })
+      // 這裡是將沒有找搜尋結果提示給使用者
+
       return res.render('index', { restaurants: req.currentRestaurants, length, keyword, results, style: 'main.css' })
     })
     .catch(error => console.log(error))
