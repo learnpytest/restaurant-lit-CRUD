@@ -99,9 +99,4 @@ router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('c
     .catch()
 })
 // 這裡是新增一筆餐廳資料路由
-
-// router.get('/restaurants', (req, res) => {
-//   res.redirect('/')
-// })
-
 module.exports = router
