@@ -21,7 +21,6 @@ const session = require('express-session')
 router.use(cookieParser('secret'))
 router.use(session({ secret: 'secret', resave: true, saveUninitialized: true }))
 router.use(flash())
-// router.use(getBackUrl)
 router.use(getBackUrl, (req, res, next) => {
   const url = req.flash('url')
   res.locals.url = url[0]
@@ -36,11 +35,17 @@ router.use(express.urlencoded({ extended: true }))
 router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (req, res) => {
   const keyword = req.query.keyword
   const results = req.results
-  if (!results) return res.render('index', { restaurants: results, length, keyword, results, style: 'main.css' })
   results.lean()
     .then(results => {
       const length = results.length
-      return res.render('index', { restaurants: results, length, keyword, results, style: 'main.css' })
+      if (req.hasResults) {
+        return res.render('index', { restaurants: results, results, length, keyword, style: 'main.css' })
+      } else {
+        return res.render('index', {
+          keyword: false,
+          error: `<h5 class= "alert alert-warning text-center"> No Search results by keyword: "${keyword}" </h5>`
+        })
+      }
     })
     .catch(error => console.log(error))
 })
@@ -96,8 +101,8 @@ router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('c
 })
 // 這裡是新增一筆餐廳資料路由
 
-router.get('/restaurants', (req, res) => {
-  res.redirect('/')
-})
+// router.get('/restaurants', (req, res) => {
+//   res.redirect('/')
+// })
 
 module.exports = router
