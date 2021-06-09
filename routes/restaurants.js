@@ -42,7 +42,6 @@ router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (re
         return res.render('index', { restaurants: results, results, length, keyword, style: 'main.css' })
       } else {
         return res.render('index', {
-          keyword: false,
           error: `<h5 class= "alert alert-warning text-center"> No Search results by keyword: "${keyword}" </h5>`
         })
       }
