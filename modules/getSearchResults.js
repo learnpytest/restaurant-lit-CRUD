@@ -11,7 +11,7 @@ const getSearchResults = (req, res, next) => {
   // keyword valid
   const regex = new RegExp(keyword, 'i')
   req.results = Restaurant.find({ $or: [{ name: { $regex: regex } }, { category: { $regex: regex } }] })
-  next()
+  return next()
 }
 module.exports = getSearchResults
 

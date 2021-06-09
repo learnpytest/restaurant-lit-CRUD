@@ -13,22 +13,30 @@ const { check, validationResult } = require('express-validator')
 const isRestaurantInputValid = require('../modules/isRestaurantInputValid')
 // 驗證
 
+// 這裡是connect-flash
+const getBackUrl = require('../modules/getBackUrl')
+const flash = require('connect-flash')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+router.use(cookieParser('secret'))
+router.use(session({ secret: 'secret', resave: true, saveUninitialized: true }))
+router.use(flash())
+// router.use(getBackUrl)
+router.use(getBackUrl, (req, res, next) => {
+  const url = req.flash('url')
+  res.locals.url = url[0]
+  next()
+})
+// 這裡是connect-flash
+
 router.use(express.static('public'))
 router.use(express.urlencoded({ extended: true }))
-
-// 這裡是回到前一頁的路由
-app.partials = {}
-router.get('/restaurants/backs', (req, res) => {
-  const backURL = req.header('Referer') + '/..'
-  res.redirect(app.partials.backURL)
-  app.partials.backURL = backURL
-})
-// 這裡是回到前一頁的路由
 
 // 這裡是搜尋功能的路由
 router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (req, res) => {
   const keyword = req.query.keyword
   const results = req.results
+  if (!results) return res.render('index', { restaurants: results, length, keyword, results, style: 'main.css' })
   results.lean()
     .then(results => {
       const length = results.length
@@ -41,10 +49,10 @@ router.get('/restaurants/search', getSearchResults, verifySearchInputOutput, (re
 // 這裡是編輯路由
 router.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  app.partials.backURL = req.header('Referer')
+  // const edit = true
   return Restaurant.findById(id)
     .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
+    .then(restaurant => res.render('edit', { restaurant, edit: true }))
     .catch(error => console.log(error))
 })
 
@@ -87,4 +95,9 @@ router.post('/restaurants', [check('name').trim().isLength({ min: 1 }), check('c
     .catch()
 })
 // 這裡是新增一筆餐廳資料路由
+
+router.get('/restaurants', (req, res) => {
+  res.redirect('/')
+})
+
 module.exports = router

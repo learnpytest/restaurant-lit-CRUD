@@ -1,4 +1,5 @@
-<a href="/restaurants/backs"
+<a href={{#if
+   edit}}"/restaurants/{{restaurant._id}}"{{else}}"{{url}}"{{/if}}
    type="button"
    class="btn btn-secondary"
    data-dismiss="modal"><i class="fas fa-window-close mr-1"></i>取消</a>
