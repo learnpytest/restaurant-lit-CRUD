@@ -34,7 +34,7 @@
     {{!-- 這裡是編輯資料的元件 --}}
 
     {{!-- 這裡是刪除資料的元件 --}}
-    <form action="/restaurants/{{this._id}}/delete"
+    <form action="/restaurants/{{this._id}}?_method=DELETE"
           method="POST"
           style="display: inline;">
       <button id="badge-delete"

@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express()
 const router = express.Router();
-
 const Restaurant = require('../models/restaurant') // 資料庫模板
 
 // 搜尋功能檔案
@@ -28,7 +27,7 @@ router.use(getBackUrl, (req, res, next) => {
 })
 // 這裡是connect-flash
 
-router.use(express.static('public'))
+router.use(express.static('public')) //靜態檔案
 router.use(express.urlencoded({ extended: true }))
 
 // 這裡是搜尋功能的路由
@@ -60,7 +59,7 @@ router.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/restaurants/:id/edit', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isRestaurantInputValid, (req, res) => {
+router.put('/restaurants/:id', [check('name').trim().isLength({ min: 1 }), check('category').trim().isLength({ min: 1 })], isRestaurantInputValid, (req, res) => {
   const id = req.params.id
   const update = req.body
   return Restaurant.findOneAndUpdate({ "_id": id }, { $set: update })
@@ -80,7 +79,7 @@ router.get('/restaurants/:id', (req, res) => {
 // 這裡是一筆詳細餐廳資料路由
 
 // 這裡是刪除一筆餐廳資料路由
-router.post('/restaurants/:id/delete', (req, res) => {
+router.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())

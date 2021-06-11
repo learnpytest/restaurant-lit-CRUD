@@ -3,10 +3,8 @@ const Restaurant = require('./models/restaurant')
 const exphbs = require('express-handlebars')
 const express = require('express')
 const app = express()
-
-// 這裡是連線資料庫
-require('./config/mongoose')
-// 這裡是連線資料庫
+const methodOverride = require('method-override') //method-override
+require('./config/mongoose') // 這裡是連線資料庫
 
 // 一些路由檔案
 const restaurants = require('./routes/restaurants')
@@ -17,6 +15,8 @@ const index = require('./routes/index')
 // 以下是一些設定, handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
+app.use(methodOverride('_method')) //method-override
 
 // 這裡是路由
 app.use(restaurants) //creat, read, update, delete
