@@ -11,7 +11,7 @@ const isRestaurantInputValid = (req, res, next) => {
   if (!errors.isEmpty()) {
     // 顯示驗證失敗的訊息
     return res.render('index', {
-      error: `<h5 class= "alert alert-warning text-center"> Update failed! ${errMessage}</h5>`
+      errorOfValidation: `<h5 class= "alert alert-warning text-center"> Update failed! ${errMessage}</h5>`
     })
   }
   next()

@@ -3,10 +3,13 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 router.get('/', (req, res) => {
+  const sortOption = req.query.sortOption
   return Restaurant.find()
     .lean()
-    .then(restaurants => res.render('index', { restaurants, style: 'main.css' })
-    )
+    .sort(req.sortMethod)
+    .then(restaurants => {
+      return res.render('index', { restaurants, sortOption, style: 'main.css' })
+    })
     .catch(error => console.log(error))
 })
 

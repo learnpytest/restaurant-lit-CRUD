@@ -6,7 +6,7 @@ const isFileValid = function (req, res, next) {
     // 顯示驗證失敗的訊息
     console.log(errors, 'Not a JSON file!')
     return res.render('index', {
-      error: `<h5 class= "alert alert-warning text-center"> Update failed! Please submit JSON file. </h5>`
+      errorOfValidation: `<h5 class= "alert alert-warning text-center"> Update failed! Please submit JSON file. </h5>`
     })
   }
   next()
