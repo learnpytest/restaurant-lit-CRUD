@@ -56,6 +56,13 @@ $ npm run seed
   ]
 }
 
+### Sorting
+- User can sort and dislpay restaurants in selected order.  The available sorting methods include sorting by:
+	- name in English
+	- rating
+	- category
+	- location
+- With searching restaurants by keyword, user can sort based on search results
 
 ### Specifications
 - MongoDB
