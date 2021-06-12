@@ -27,6 +27,7 @@
             <nav class="navbar navbar-light"
                  style="background-color: #e3f2fd;">
                   <div class="container">
+
                         <a class="navbar-brand"
                            href="/">
                               <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
@@ -38,29 +39,10 @@
                         </a>
 
                         {{!-- 這裡是上傳檔案元件 --}}
-                        {{!-- <form action="/upload"
-                              method="post"
-                              enctype="multipart/form-data">
-                              <div class="input-group">
-                                    <div class="custom-file">
-                                          <input id="file-upload-json"
-                                                 name="fileUpload"
-                                                 type="file" />
-                                          <label for="file-upload-json">Choose file...</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                          <button type="submit"
-                                                  class="btn btn-info">Import JSON</button>
-                                    </div>
-
-                              </div>
-                        </form> --}}
-                        {{!-- 這裡是上傳檔案元件 --}}
-                        {{!-- 這裡是上傳檔案優化元件 --}}
                         <form action="/upload"
                               method="post"
                               enctype="multipart/form-data">
-                              <div class="input-group mb-3">
+                              <div class="input-group">
                                     <input id="file-upload-json"
                                            name="fileUpload"
                                            type="file"
@@ -76,7 +58,8 @@
                                     </div>
                               </div>
                         </form>
-                        {{!-- 這裡是上傳檔案優化元件 --}}
+                        {{!-- 這裡是上傳檔案元件 --}}
+
 
                         {{!-- 這裡是新增餐廳元件 --}}
                         <button type="button"
