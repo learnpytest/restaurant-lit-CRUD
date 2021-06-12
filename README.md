@@ -65,6 +65,8 @@ $ npm run seed
 - Using middleware, express routes
 - Error/exception handling
 	- Error message pops up if user enter empty keywords in search bar
+	- Message pops up if there's no search results by user's keyword
+	- Error message pops up if user upload and import none JSON file
 	- Confirm window pops up before deleting restaurant data
 	- Form input validation for create and edit function by bootstrap on browser and express on server end
 - The app has scalabilities to add more restaurants data
