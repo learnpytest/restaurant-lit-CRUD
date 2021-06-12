@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator')
+
 const isRestaurantInputValid = (req, res, next) => {
   const { name, category } = req.body
   const errors = validationResult(req)

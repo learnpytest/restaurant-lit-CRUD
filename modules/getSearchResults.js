@@ -1,4 +1,3 @@
-require('../config/mongoose')// 這裡是連線資料庫
 const Restaurant = require('../models/restaurant') // 載入 todo model
 
 const getSearchResults = (req, res, next) => {

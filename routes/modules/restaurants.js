@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const Restaurant = require('../../models/restaurant') // 資料庫模板
 
 // 搜尋功能檔案
