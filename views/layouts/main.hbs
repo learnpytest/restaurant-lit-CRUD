@@ -41,32 +41,38 @@
                         {{!-- <form action="/upload"
                               method="post"
                               enctype="multipart/form-data">
+                              <div class="input-group">
+                                    <div class="custom-file">
+                                          <input id="file-upload-json"
+                                                 name="fileUpload"
+                                                 type="file" />
+                                          <label for="file-upload-json">Choose file...</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                          <button type="submit"
+                                                  class="btn btn-info">Import JSON</button>
+                                    </div>
 
-                              <input class="bg-secondary"
-                                     id="file-upload-json"
-                                     name="fileUpload"
-                                     type="file" />
-                              <button type="submit"
-                                      class="btn btn-info">Import JSON</button>
+                              </div>
                         </form> --}}
                         {{!-- 這裡是上傳檔案元件 --}}
                         {{!-- 這裡是上傳檔案優化元件 --}}
                         <form action="/upload"
                               method="post"
                               enctype="multipart/form-data">
-                              <div class="input-group">
-                                    <div class="custom-file">
-                                          <input type="file"
-                                                 class="custom-file-input"
-                                                 id="file-upload-json"
-                                                 name="fileUpload"
-                                                 required>
-                                          <label class="custom-file-label"
-                                                 for="file-upload-json">Choose a JSON file...</label>
+                              <div class="input-group mb-3">
+                                    <input id="file-upload-json"
+                                           name="fileUpload"
+                                           type="file"
+                                           class="form-control pt-1"
+                                           required>
+                                    <div class="input-group-append">
+                                          <label class="input-group-text"
+                                                 for="file-upload-json">Upload</label>
                                     </div>
                                     <div class="input-group-append">
-                                          <button class="btn btn-outline-secondary"
-                                                  type="submit">Import</button>
+                                          <button type="submit"
+                                                  class="btn btn-info">Import</button>
                                     </div>
                               </div>
                         </form>
