@@ -1,47 +1,103 @@
-<!-- search bar -->
 <div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/restaurants/search"
-            method="GET">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text"
-                 name="keyword"
-                 class="form-control"
-                 placeholder="輸入餐廳、分類"
-                 aria-label="Restaurant Name..."
-                 aria-describedby="search-button"
-                 value={{keyword}}>
-          <div class="input-group-append">
-            <button class="btn btn-major"
-                    type="submit"
-                    id="search-button"><i class="fas fa-search"></i></button>
+  <div class="row mt-5"
+       id="menu-wrappers">
+    <!-- search bar -->
+    <div class="col-md-3 col-5 offset-md-1">
+      <div class="search-bar-inner">
+        <form action="/restaurants/search"
+              method="GET">
+          <div class="input-group">
+            <input type="text"
+                   name="keyword"
+                   class="form-control"
+                   placeholder="輸入餐廳、分類"
+                   aria-label="Restaurant Name..."
+                   aria-describedby="search-button"
+                   value={{keyword}}>
+            <div class="input-group-append">
+              <button class="btn btn-major"
+                      type="submit"
+                      id="search-button"><i class="fas fa-search"></i></button>
+            </div>
           </div>
-        </div>
+        </form>
+      </div>
+    </div>
+    <!-- search bar -->
+
+    {{!-- sort options --}}
+    <div class="col-md-3 col-5 offset-md-4"
+         id="sort-menu-wrapper">
+      <form class="sort-dropdown"
+            method="GET"
+            action="{{#if results}}/restaurants/search/sort{{else}}/{{/if}}"
+            style="display: inline;">
+        <select class="form-control"
+                id="sortFormControlSelect"
+                name="sortOption"
+                onchange="this.form.submit()">
+          <option value="0">Sort</option>
+          <option value="nameAsc"
+                  {{#if
+                  (eq
+                  sortOption "nameAsc"
+                  )}}
+                  selected
+                  {{/if}}>名稱 A -> Z</option>
+          <option value="nameDesc"
+                  {{#if
+                  (eq
+                  sortOption "nameDesc"
+                  )
+                  }}selected{{/if}}>名稱 Z -> A</option>
+          <option value="ratingDesc"
+                  {{#if
+                  (eq
+                  sortOption "ratingDesc"
+                  )
+                  }}selected{{/if}}>評分 高 -> 低</option>
+          <option value="ratingAsc"
+                  {{#if
+                  (eq
+                  sortOption "ratingAsc"
+                  )
+                  }}selected{{/if}}>評分 低 -> 高</option>
+          <option value="category"
+                  {{#if
+                  (eq
+                  sortOption "category"
+                  )
+                  }}selected{{/if}}>類別</option>
+          <option value="location"
+                  {{#if
+                  (eq
+                  sortOption "location"
+                  )
+                  }}selected{{/if}}>地區</option>
+        </select>
+
+
       </form>
     </div>
-    {{#if keyword}}
-    {{> search}}
-    {{/if}}
-
+    {{!-- sort options --}}
   </div>
+  <hr>
+  {{#if keyword}}
+  {{> search}}
+  {{/if}}
+
 </div>
 
 <!-- restaurant list -->
-<div class="container mt-5">
+<div class="container mt-4">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-      <div class="card-columns">
-        {{!-- partial view --}}
-        {{> restaurants}}
-      </div>
-    </div>
+    {{!-- partial view --}}
+    {{> restaurants}}
   </div>
 </div>
 {{!-- error for form validation --}}
-{{#if error}}
-{{{error}}}
+{{#if errorOfValidation}}
+{{{errorOfValidation}}}
 <div class="col-12 mr-1 mt-5 text-center"><a href="{{url}}"
      class="badge badge-pill badge-info"
      style="font-size: 16px;"> <i class="fas fa-arrow-left mr-2"></i>Back</a></div>
