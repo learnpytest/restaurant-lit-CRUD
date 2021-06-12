@@ -1,11 +1,12 @@
 <div class="container search-bar">
-  <div class="row mt-5"
-       id="menu-wrappers">
-    <!-- search bar -->
-    <div class="col-lg-3 col-5 offset-1">
-      <div class="search-bar-inner">
-        <form action="/restaurants/search"
-              method="GET">
+
+  <form action="/restaurants/search/sort"
+        method="GET">
+    <div class="row mt-5"
+         id="menu-wrappers">
+      <!-- search bar -->
+      <div class="col-lg-3 col-5 offset-1">
+        <div class="search-bar-inner">
           <div class="input-group">
             <input type="text"
                    name="keyword"
@@ -20,73 +21,81 @@
                       id="search-button"><i class="fas fa-search"></i></button>
             </div>
           </div>
-        </form>
+
+        </div>
+      </div>
+      <!-- search bar -->
+
+      {{!-- sort options --}}
+      <div class="col-md-3 col-5 offset-md-4"
+           id="sort-menu-wrapper">
+        {{!-- <form class="sort-dropdown"
+              method="GET"
+              action="{{#if results}}/restaurants/search/sort{{else}}/{{/if}}"
+              style="display: inline;"> --}}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <select class="form-control"
+                      id="sortFormControlSelect"
+                      name="sort-option">
+                <option value="0">Sort</option>
+                <option value="nameAsc"
+                        {{#if
+                        (eq
+                        sort-option "name-asc"
+                        )}}
+                        selected
+                        {{/if}}>名稱 A -> Z</option>
+                <option value="name-desc"
+                        {{#if
+                        (eq
+                        sort-option "nameDesc"
+                        )
+                        }}selected{{/if}}>名稱 Z -> A</option>
+                <option value="rating-desc"
+                        {{#if
+                        (eq
+                        sort-option "rating-desc"
+                        )
+                        }}selected{{/if}}>評分 高 -> 低</option>
+                <option value="rating-asc"
+                        {{#if
+                        (eq
+                        sort-option "rating-asc"
+                        )
+                        }}selected{{/if}}>評分 低 -> 高</option>
+                <option value="category"
+                        {{#if
+                        (eq
+                        sort-option "category"
+                        )
+                        }}selected{{/if}}>類別</option>
+                <option value="location"
+                        {{#if
+                        (eq
+                        sort-option "location"
+                        )
+                        }}selected{{/if}}>地區</option>
+              </select>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-warning"
+                      type="submit"
+                      id="sort-submit-button">Go</button>
+            </div>
+          </div>
+
       </div>
     </div>
-    <!-- search bar -->
-
-    {{!-- sort options --}}
-    <div class="col-md-3 col-5 offset-md-4"
-         id="sort-menu-wrapper">
-      <form class="sort-dropdown"
-            method="GET"
-            action="{{#if results}}/restaurants/search/sort{{else}}/{{/if}}"
-            style="display: inline;">
-        <select class="form-control"
-                id="sortFormControlSelect"
-                name="sortOption"
-                onchange="this.form.submit()">
-          <option value="0">Sort</option>
-          <option value="nameAsc"
-                  {{#if
-                  (eq
-                  sortOption "name-asc"
-                  )}}
-                  selected
-                  {{/if}}>名稱 A -> Z</option>
-          <option value="name-desc"
-                  {{#if
-                  (eq
-                  sortOption "nameDesc"
-                  )
-                  }}selected{{/if}}>名稱 Z -> A</option>
-          <option value="rating-desc"
-                  {{#if
-                  (eq
-                  sortOption "rating-desc"
-                  )
-                  }}selected{{/if}}>評分 高 -> 低</option>
-          <option value="rating-asc"
-                  {{#if
-                  (eq
-                  sortOption "rating-asc"
-                  )
-                  }}selected{{/if}}>評分 低 -> 高</option>
-          <option value="category"
-                  {{#if
-                  (eq
-                  sortOption "category"
-                  )
-                  }}selected{{/if}}>類別</option>
-          <option value="location"
-                  {{#if
-                  (eq
-                  sortOption "location"
-                  )
-                  }}selected{{/if}}>地區</option>
-        </select>
-
-
-      </form>
-    </div>
-    {{!-- sort options --}}
-  </div>
-  <hr>
-  {{#if keyword}}
-  {{> search}}
-  {{/if}}
-
+  </form>
+  {{!-- sort options --}}
 </div>
+<hr>
+{{#if keyword}}
+{{> search}}
+{{/if}}
+
+
 
 <!-- restaurant list -->
 <div class="container mt-4 mx-auto">
