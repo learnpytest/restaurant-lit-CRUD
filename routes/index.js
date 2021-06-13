@@ -25,14 +25,15 @@ const home = require('./modules/home')
 const restaurants = require('./modules/restaurants')
 const upload = require('./modules/upload')
 
-const isNotEmptySubmit = require('../modules/isNotEmptySubmit')
+const isEmptySubmit = require('../modules/isEmptySubmit')
 
 router.use('/upload', upload)
 router.use('/restaurants', function (req, res, next) {
-  if (isNotEmptySubmit(req, res)) {
-    return restaurants(req, res, next)
-  } else {
+  //user press search or sort button with empty input
+  if (!isEmptySubmit(req, res) && (req.path === "/search/sort")) {
     return home(req, res)
+  } else {
+    return restaurants(req, res, next)
   }
 })
 router.use('/', home)

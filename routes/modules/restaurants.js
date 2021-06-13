@@ -17,7 +17,6 @@ router.get('/search/sort', getSearchResults, verifySearchInputOutput, (req, res)
   const keyword = req.query.keyword
   const sortOption = req.query.sorting
   const results = req.results
-  req.flash('lastSearchQuery', keyword)
   results.lean()
     .sort(req.sortMethod)
     .then(results => {

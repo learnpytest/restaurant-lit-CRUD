@@ -23,14 +23,10 @@ const getSortMethod = (req, res, next) => {
   if (!sortOption) return next()
   if (sortMethod) {
     req.flash('sortMethod', sortMethod)
-    req.flash('sortOption', sortOption)
   }
   const sortMethodOnFlash = req.flash('sortMethod')
-  const sortOptionOnFlash = req.flash('sortOption')
-
-  //在路由中使用req.sortMethod, req.sortOption
+  //在路由中使用req.sortMethod
   req.sortMethod = sortMethodOnFlash[0]
-  req.sortOption = sortOptionOnFlash[0]
   next()
 }
 module.exports = getSortMethod
