@@ -25,9 +25,16 @@ const home = require('./modules/home')
 const restaurants = require('./modules/restaurants')
 const upload = require('./modules/upload')
 
+const isNotEmptySubmit = require('../modules/isNotEmptySubmit')
 
-router.use('/', home)
-router.use('/restaurants', restaurants)
 router.use('/upload', upload)
+router.use('/restaurants', function (req, res, next) {
+  if (isNotEmptySubmit(req, res)) {
+    return restaurants(req, res, next)
+  } else {
+    return home(req, res)
+  }
+})
+router.use('/', home)
 
 module.exports = router

@@ -6,35 +6,17 @@ const Restaurant = require('../../models/restaurant') // 資料庫模板
 // 搜尋功能檔案
 const getSearchResults = require('../../modules/getSearchResults')
 const verifySearchInputOutput = require('../../modules/verifySearchInputOutput')
-const searchData = require('../../modules/searchData')
 
 // 驗證
 const { check, validationResult } = require('express-validator')
 const isRestaurantInputValid = require('../../modules/isRestaurantInputValid')
 // 驗證
 
-// 這裡是排序搜尋結果
-router.get('/search/sort', (req, res) => {
-  const keywordFromFlash = req.flash('lastSearchQuery')
-  const keyword = keywordFromFlash[0]
-  req.flash('lastSearchQuery', keyword)
-  const results = searchData(keyword)
-  const sortOption = req.sortOption
-  results.lean()
-    .sort(req.sortMethod)
-    .then(results => {
-      const lengthOfResults = results.length
-      return res.render('index', { restaurants: results, results, lengthOfResults, keyword, sortOption, style: 'main.css' })
-    })
-    .catch(error => console.log(error))
-})
-// 這裡是排序搜尋結果
-
-// 這裡是搜尋功能的路由
-router.get('/search', getSearchResults, verifySearchInputOutput, (req, res) => {
+// 這裡是搜尋與排序
+router.get('/search/sort', getSearchResults, verifySearchInputOutput, (req, res) => {
   const keyword = req.query.keyword
+  const sortOption = req.query.sorting
   const results = req.results
-  const sortOption = req.sortOption
   req.flash('lastSearchQuery', keyword)
   results.lean()
     .sort(req.sortMethod)
@@ -50,7 +32,7 @@ router.get('/search', getSearchResults, verifySearchInputOutput, (req, res) => {
     })
     .catch(error => console.log(error))
 })
-// 這裡是搜尋功能的路由
+// 這裡是搜尋與排序
 
 // 這裡是編輯路由
 router.get('/:id/edit', (req, res) => {

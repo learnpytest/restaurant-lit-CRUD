@@ -1,7 +1,6 @@
 const getSortParam = function (sortOption) {
-  // console.log(sortOption)
   switch (sortOption) {
-    case 'nameAsc':
+    case 'name-asc':
       return { name_en: 'asc' };
     case 'name-desc':
       return { name_en: 'desc' };
@@ -18,7 +17,7 @@ const getSortParam = function (sortOption) {
   }
 }
 const getSortMethod = (req, res, next) => {
-  const sortOption = req.query.sortOption
+  const sortOption = req.query.sorting
   const sortMethod = getSortParam(sortOption)
   //如果sortMethod為true，更新req.flash('sortMethod)
   if (!sortOption) return next()

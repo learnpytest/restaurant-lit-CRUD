@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-router.get('/', (req, res) => {
-  const sortOption = req.query.sortOption
+router.use((req, res) => {
+  const sortOption = req.query.sorting
   return Restaurant.find()
     .lean()
     .sort(req.sortMethod)
@@ -12,5 +12,4 @@ router.get('/', (req, res) => {
     })
     .catch(error => console.log(error))
 })
-
 module.exports = router
