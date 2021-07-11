@@ -1,7 +1,7 @@
 const multer = require('multer');
-const fs = require('fs');
 const UPLOAD_PATH = './uploads'
 const upload = multer({ dest: UPLOAD_PATH })
+const fs = require('fs');
 const { promisify } = require('util')
 const readFile = promisify(fs.readFile)
 

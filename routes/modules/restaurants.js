@@ -33,13 +33,17 @@ router.get('/search/sort', getSearchResults, verifySearchInputOutput, (req, res)
 })
 // 這裡是搜尋與排序
 
+// 這裡是回復編輯路由
+router.get('/:id/edit/back', (req, res) => {
+  return res.render('edit', { restaurant: req.flash('body') })
+})
+
 // 這裡是編輯路由
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  // const edit = true
   return Restaurant.findById(id)
     .lean()
-    .then(restaurant => res.render('edit', { restaurant, edit: true }))
+    .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
 

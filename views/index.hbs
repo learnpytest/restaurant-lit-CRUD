@@ -103,7 +103,8 @@
 {{!-- error for form validation --}}
 {{#if errorOfValidation}}
 {{{errorOfValidation}}}
-<div class="col-12 mr-1 mt-5 text-center"><a href="{{url}}"
+<div class="col-12 mr-1 mt-5 text-center"><a href={{#if
+     edit}}"{{url}}/back"{{else}}"{{url}}"{{/if}}
      class="badge badge-pill badge-info"
-     style="font-size: 16px;"> <i class="fas fa-arrow-left mr-2"></i>Back</a></div>
+     style="font-size: 16px;"><i class="fas fa-arrow-left mr-2"></i>Back</a></div>
 {{/if}}

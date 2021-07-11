@@ -14,8 +14,11 @@ router.use(cookieParser('secret'))
 router.use(session({ secret: 'secret', resave: true, saveUninitialized: true }))
 router.use(flash())
 router.use(getBackUrl, getSortMethod, (req, res, next) => {
-  const url = req.flash('url')
-  res.locals.url = url[0]
+  if (res.locals.url) {
+    if (res.locals.url.slice(-4) === 'edit') res.locals.edit = true
+  } else {
+    res.locals.edit = false
+  }
   next()
 })
 // 這裡是connect - flash
